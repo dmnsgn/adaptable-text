@@ -29,7 +29,8 @@
       AdaptableText.prototype.reset = function() {
         this.elementWidth = this.element.offsetWidth;
         this.styles = window.getComputedStyle(this.element);
-        this.fontSize = +this.styles.fontSize.replace('px', '');
+        this.currentFontSize = +this.styles.fontSize.replace('px', '');
+        this.initialFontsize = this.currentFontSize;
         this.maxCharWidth = 0;
         this._calculateMaxCharWidth();
       };
@@ -42,15 +43,30 @@
       AdaptableText.prototype.adapt = function() {
         var textWidth;
         this.text = this.element.value;
-        console.log(this.elementWidth / this.maxCharWidth, this.styles.fontSize, this.settings.minFontSize);
-        textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.fontSize + "px " + this.styles.fontFamily);
-        if (textWidth > this.elementWidth - this.maxCharWidth && this.maxCharWidth !== 0) {
-          if (this.fontSize > this.settings.minFontSize) {
-            this.fontSize -= 1;
-          }
-          console.log(this.fontSize);
-          this.element.style.fontSize = this.fontSize + "px";
+        textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
+        this._checkSize();
+        this.element.style.fontSize = this.currentFontSize + "px";
+      };
+
+      AdaptableText.prototype._checkSize = function() {
+        var recursiveCheck, textWidth;
+        textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
+        if (this._getTextWidth(this.text, textWidth) < this.elementWidth - this.maxCharWidth) {
+          return;
         }
+        recursiveCheck = (function(_this) {
+          return function() {
+            textWidth = _this._getTextWidth(_this.text, _this.styles.fontStyle + " " + _this.currentFontSize + "px " + _this.styles.fontFamily);
+            if (_this._getTextWidth(_this.text, textWidth) > _this.elementWidth - _this.maxCharWidth && _this.currentFontSize > _this.settings.minFontSize) {
+              console.log('check');
+              _this.currentFontSize -= 0.1;
+              return recursiveCheck();
+            } else {
+
+            }
+          };
+        })(this);
+        recursiveCheck();
       };
 
 

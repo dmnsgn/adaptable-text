@@ -29,7 +29,8 @@ do ($ = jQuery, window, document) ->
 
       @elementWidth = @element.offsetWidth
       @styles = window.getComputedStyle @element
-      @fontSize = +@styles.fontSize.replace('px', '')
+      @currentFontSize = +@styles.fontSize.replace('px', '')
+      @initialFontsize = @currentFontSize
 
       @maxCharWidth = 0
       @_calculateMaxCharWidth()
@@ -44,17 +45,35 @@ do ($ = jQuery, window, document) ->
       # TODO; check if textContent or value
       @text = @element.value
 
-      console.log @elementWidth / @maxCharWidth, @styles.fontSize, @settings.minFontSize
-
       # https://developer.mozilla.org/en-US/docs/Web/CSS/font
-      textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@fontSize}px #{@styles.fontFamily}"
+      textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
 
-      if textWidth > @elementWidth - @maxCharWidth and @maxCharWidth isnt 0
-        # TODO: calculate fontsize decrement
-        if @fontSize > @settings.minFontSize
-          @fontSize -= 1
-        console.log @fontSize
-        @element.style.fontSize = "#{@fontSize}px"
+      # Change current font size if needed
+      @_checkSize()
+
+      # Apply styles
+      @element.style.fontSize = "#{@currentFontSize}px"
+
+      return
+
+    _checkSize: ->
+
+      textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
+
+      # Text short enough
+      if @_getTextWidth(@text, textWidth) < @elementWidth - @maxCharWidth
+        return
+
+      recursiveCheck = =>
+        textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
+        if @_getTextWidth(@text, textWidth) > @elementWidth - @maxCharWidth and @currentFontSize > @settings.minFontSize
+          console.log 'check'
+          @currentFontSize -= 0.1
+          recursiveCheck()
+        else
+          return
+
+      recursiveCheck()
 
       return
 
