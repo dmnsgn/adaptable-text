@@ -50,7 +50,6 @@
           }
           console.log(this.fontSize);
           this.element.style.fontSize = this.fontSize + "px";
-          console.log(this.elementWidth / this.maxCharWidth, this.fontSize, this.settings.minFontSize);
         }
       };
 

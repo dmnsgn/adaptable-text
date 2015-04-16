@@ -3,9 +3,6 @@ do ($ = jQuery, window, document) ->
 
   pluginName = "adaptableText"
   defaults =
-    # fontStyle: "normal"
-    # fontSize: "10px"
-    # fontFamily: "Arial"
     minFontSize: 15
 
   class AdaptableText
@@ -53,13 +50,11 @@ do ($ = jQuery, window, document) ->
       textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@fontSize}px #{@styles.fontFamily}"
 
       if textWidth > @elementWidth - @maxCharWidth and @maxCharWidth isnt 0
+        # TODO: calculate fontsize decrement
         if @fontSize > @settings.minFontSize
           @fontSize -= 1
         console.log @fontSize
         @element.style.fontSize = "#{@fontSize}px"
-
-        console.log @elementWidth / @maxCharWidth, @fontSize, @settings.minFontSize
-      # console.log @_getTextWidth @text, "#{@_defaults.fontStyle} #{@_defaults.fontSize} #{@_defaults.fontFamily}"
 
       return
 
@@ -67,7 +62,6 @@ do ($ = jQuery, window, document) ->
       Get text width via canvas
     ###
     _getTextWidth: (text, font) ->
-      # console.log font
       canvas = @canvas or (@canvas = document.createElement('canvas'))
       context = canvas.getContext('2d')
       context.font = font
@@ -80,6 +74,7 @@ do ($ = jQuery, window, document) ->
     ###
     _calculateMaxCharWidth: (text, font) ->
 
+      # TODO: get all possible chars
       chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split('')
       len = chars.length
 
@@ -87,7 +82,6 @@ do ($ = jQuery, window, document) ->
         char = chars[len]
         charWidth = @_getTextWidth char, "#{@styles.fontStyle} #{@styles.fontSize} #{@styles.fontFamily}"
         if charWidth > @maxCharWidth
-          # console.log char, charWidth
           @maxCharWidth = charWidth
 
       return
