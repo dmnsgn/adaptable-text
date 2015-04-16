@@ -58,20 +58,24 @@ do ($ = jQuery, window, document) ->
 
     _checkSize: ->
 
-      textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
+      if @_getTextWidth(@text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}") < @elementWidth - @maxCharWidth
 
-      # Text short enough
-      if @_getTextWidth(@text, textWidth) < @elementWidth - @maxCharWidth
-        return
+        recursiveCheck = =>
+          textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
+          if @_getTextWidth(@text, textWidth) < @elementWidth - @maxCharWidth and @currentFontSize < @initialFontsize
+            @currentFontSize += 0.1
+            recursiveCheck()
+          else
+            return
 
-      recursiveCheck = =>
-        textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
-        if @_getTextWidth(@text, textWidth) > @elementWidth - @maxCharWidth and @currentFontSize > @settings.minFontSize
-          console.log 'check'
-          @currentFontSize -= 0.1
-          recursiveCheck()
-        else
-          return
+      else
+        recursiveCheck = =>
+          textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
+          if @_getTextWidth(@text, textWidth) > @elementWidth - @maxCharWidth and @currentFontSize > @settings.minFontSize
+            @currentFontSize -= 0.1
+            recursiveCheck()
+          else
+            return
 
       recursiveCheck()
 

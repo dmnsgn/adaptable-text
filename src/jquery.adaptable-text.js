@@ -49,23 +49,34 @@
       };
 
       AdaptableText.prototype._checkSize = function() {
-        var recursiveCheck, textWidth;
-        textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
-        if (this._getTextWidth(this.text, textWidth) < this.elementWidth - this.maxCharWidth) {
-          return;
-        }
-        recursiveCheck = (function(_this) {
-          return function() {
-            textWidth = _this._getTextWidth(_this.text, _this.styles.fontStyle + " " + _this.currentFontSize + "px " + _this.styles.fontFamily);
-            if (_this._getTextWidth(_this.text, textWidth) > _this.elementWidth - _this.maxCharWidth && _this.currentFontSize > _this.settings.minFontSize) {
-              console.log('check');
-              _this.currentFontSize -= 0.1;
-              return recursiveCheck();
-            } else {
+        var recursiveCheck;
+        if (this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily) < this.elementWidth - this.maxCharWidth) {
+          recursiveCheck = (function(_this) {
+            return function() {
+              var textWidth;
+              textWidth = _this._getTextWidth(_this.text, _this.styles.fontStyle + " " + _this.currentFontSize + "px " + _this.styles.fontFamily);
+              if (_this._getTextWidth(_this.text, textWidth) < _this.elementWidth - _this.maxCharWidth && _this.currentFontSize < _this.initialFontsize) {
+                _this.currentFontSize += 0.1;
+                return recursiveCheck();
+              } else {
 
-            }
-          };
-        })(this);
+              }
+            };
+          })(this);
+        } else {
+          recursiveCheck = (function(_this) {
+            return function() {
+              var textWidth;
+              textWidth = _this._getTextWidth(_this.text, _this.styles.fontStyle + " " + _this.currentFontSize + "px " + _this.styles.fontFamily);
+              if (_this._getTextWidth(_this.text, textWidth) > _this.elementWidth - _this.maxCharWidth && _this.currentFontSize > _this.settings.minFontSize) {
+                _this.currentFontSize -= 0.1;
+                return recursiveCheck();
+              } else {
+
+              }
+            };
+          })(this);
+        }
         recursiveCheck();
       };
 
