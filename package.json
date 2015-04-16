@@ -1,19 +1,19 @@
 {
-  "name": "jquery-adaptable-text",
-  "version": "0.0.0",
-  "description": ".",
+  "name": "adaptable-text",
+  "title": "Adaptable Text",
+  "version": "0.1.0",
+  "description": "Adapt font size to fit text in element.",
   "keywords": [
-    "jquery-plugin",
-    "jquery",
-    "boilerplate",
-    "plugins"
+    "text",
+    "adaptable",
+    "javascript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmnsgn/jquery-adaptable-text.git"
+    "url": "https://github.com/dmnsgn/adaptable-text.git"
   },
   "bugs": {
-    "url": "https://github.com/dmnsgn/jquery-adaptable-text/issues"
+    "url": "https://github.com/dmnsgn/adaptable-text/issues"
   },
   "author": {
     "name": "Damien Seguin",

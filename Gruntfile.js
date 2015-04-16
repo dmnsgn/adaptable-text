@@ -8,12 +8,13 @@ module.exports = function(grunt) {
     // Banner definitions
     meta: {
       banner: "/*\n" +
-        " *  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
-        " *  <%= pkg.description %>\n" +
-        " *  <%= pkg.homepage %>\n" +
+        " * <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
         " *\n" +
-        " *  Made by <%= pkg.author.name %>\n" +
-        " *  Under <%= pkg.license %> License\n" +
+        " * Copyright (c) <%= pkg.author.name %> - <%= pkg.author.url %>\n" +
+        " *\n" +
+        " * <%= pkg.description %>\n" +
+        " *\n" +
+        " * <%= pkg.license %> \n" +
         " */\n"
     },
 
