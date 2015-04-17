@@ -44,8 +44,12 @@
         var textWidth;
         this.text = this.element.value;
         textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
+        this.previousFontSize = this.currentFontSize;
         this._checkSize();
-        this.element.style.fontSize = this.currentFontSize + "px";
+        if (this.previousFontSize !== this.currentFontSize) {
+          this.currentFontSize = ~~(this.currentFontSize * 100) / 100;
+          this.element.style.fontSize = this.currentFontSize + "px";
+        }
       };
 
       AdaptableText.prototype._checkSize = function() {

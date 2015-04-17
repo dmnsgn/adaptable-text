@@ -49,10 +49,13 @@ do ($ = jQuery, window, document) ->
       textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
 
       # Change current font size if needed
+      @previousFontSize = @currentFontSize
       @_checkSize()
 
       # Apply styles
-      @element.style.fontSize = "#{@currentFontSize}px"
+      if @previousFontSize isnt @currentFontSize
+        @currentFontSize = ~~(@currentFontSize * 100) / 100
+        @element.style.fontSize = "#{@currentFontSize}px"
 
       return
 
