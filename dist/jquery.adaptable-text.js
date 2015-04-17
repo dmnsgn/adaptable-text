@@ -1,9 +1,9 @@
 /*
- * Adaptable Text - v0.1.0
+ * Adaptable Text - v0.1.2
  *
  * Copyright (c) Damien Seguin - https://github.com/dmnsgn
  *
- * Adapt font size to fit text in element.
+ * Adapt font size to fit text in element (WIP)
  *
  * MIT 
  */
@@ -51,10 +51,14 @@
 
       AdaptableText.prototype.adapt = function() {
         var textWidth;
-        this.text = this.element.value;
+        this.text = this.element.value || this.element.textContent;
         textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
+        this.previousFontSize = this.currentFontSize;
         this._checkSize();
-        this.element.style.fontSize = this.currentFontSize + "px";
+        if (this.previousFontSize !== this.currentFontSize) {
+          this.currentFontSize = ~~(this.currentFontSize * 100) / 100;
+          this.element.style.fontSize = this.currentFontSize + "px";
+        }
       };
 
       AdaptableText.prototype._checkSize = function() {
@@ -108,9 +112,9 @@
         Calculate max char width
        */
 
-      AdaptableText.prototype._calculateMaxCharWidth = function(text, font) {
+      AdaptableText.prototype._calculateMaxCharWidth = function() {
         var char, charWidth, chars, len;
-        chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split('');
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefhijklmnopqrstuvwxyz0123456789!?*()@£$%^&_-+=[]{}:;\'"\\|<>,./~`'.split('');
         len = chars.length;
         while (len--) {
           char = chars[len];
