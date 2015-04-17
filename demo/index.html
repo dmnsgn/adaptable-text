@@ -4,27 +4,92 @@
 		<title>jQuery Adaptable Text</title>
 		<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
 		<style>
-			#element {
-				text-align: center;
+			body {
+				color: #2b2b2b;
+				background-color: #FBFBFB;
+				font-family: 'Bangers', sans-serif;
+			}
+			#wrapper {
+				width: 700px;
+				margin: 0 auto;
+			}
+			.example {
+				float: left;
+				width: 100%;
+				clear: both;
+				margin-bottom: 20px;
+			}
+			.example--0 .element {
+				float: left;
+				width: 50%;
+			}
+
+			/* Element */
+			.editableElement,
+			.element {
+				overflow-wrap: break-word;
 				box-sizing: border-box;
 				width: 300px;
-				height: 200px;
-				font-family: 'Bangers', sans-serif;
 				font-size: 30px;
+				text-align: center;
+			}
+			textarea {
+				min-height: 100px;
 			}
 		</style>
 	</head>
 	<body>
-		<textarea id="element" autofocus></textarea>
+
+		<div id="wrapper">
+			<h1>Adaptable Text</h1>
+
+			<div class="example example--0">
+				<h2>div adapted</h2>
+				<div class="element">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis eum officiis architecto recusandae excepturi totam expedita beatae. Tempore incidunt, laudantium expedita doloribus labore consequatur, quas voluptate, ratione molestiae hic illo.</div>
+				<div class="element">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis eum officiis architecto recusandae excepturi totam expedita beatae. Tempore incidunt, laudantium expedita doloribus labore consequatur, quas voluptate, ratione molestiae hic illo.</div>
+			</div>
+
+			<div class="example example--1">
+				<h2>textarea adapted</h2>
+				<textarea class="editableElement" autofocus></textarea>
+			</div>
+
+			<div class="example example--2">
+				<h2>textarea adapted + div adapted</h2>
+				<textarea class="editableElement" autofocus></textarea>
+				<div class="element"></div>
+			</div>
+
+		</div>
+
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script src="../src/jquery.adaptable-text.js"></script>
 		<script>
 			$(function() {
-				var $el = $("#element");
-				var text = $el.adaptableText();
 
-				$el.on('keyup', function() {
-					text.data('adaptableText').adapt()
+				// example--0
+				var $element0 = $(".example--0 .element").last();
+				var elementAdapted0 = $element0.adaptableText();
+				elementAdapted0.data('adaptableText').adapt();
+
+				// example--1
+				var $editableElement1 = $(".example--1 .editableElement");
+				var elementAdapted1 = $editableElement1.adaptableText();
+				$editableElement1.on('keyup', function() {
+					$editableElement1.data('adaptableText').adapt();
+				});
+
+				// example--2
+				var $editableElement2 = $(".example--2 .editableElement");
+				var $el2 = $(".example--2 .element");
+
+				var editableElementAdapted2 = $editableElement2.adaptableText();
+				var elementAdapted2 = $el2.adaptableText();
+
+				$editableElement2.on('keyup', function() {
+					editableElementAdapted2.data('adaptableText').adapt();
+					$el2.text(this.value);
+					elementAdapted2.data('adaptableText').adapt();
 				});
 
 			});

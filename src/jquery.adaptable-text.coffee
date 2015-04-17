@@ -42,17 +42,20 @@ do ($ = jQuery, window, document) ->
     ###
     adapt: ->
 
-      # TODO; check if textContent or value
-      @text = @element.value
+      # Get content
+      @text = @element.value or @element.textContent
 
       # https://developer.mozilla.org/en-US/docs/Web/CSS/font
       textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"
 
       # Change current font size if needed
+      @previousFontSize = @currentFontSize
       @_checkSize()
 
       # Apply styles
-      @element.style.fontSize = "#{@currentFontSize}px"
+      if @previousFontSize isnt @currentFontSize
+        @currentFontSize = ~~(@currentFontSize * 100) / 100
+        @element.style.fontSize = "#{@currentFontSize}px"
 
       return
 
@@ -95,10 +98,9 @@ do ($ = jQuery, window, document) ->
     ###
       Calculate max char width
     ###
-    _calculateMaxCharWidth: (text, font) ->
+    _calculateMaxCharWidth: ->
 
-      # TODO: get all possible chars
-      chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split('')
+      chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefhijklmnopqrstuvwxyz0123456789!?*()@£$%^&_-+=[]{}:;\'"\\|<>,./~`'.split('')
       len = chars.length
 
       while len--
