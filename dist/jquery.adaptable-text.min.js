@@ -1,5 +1,5 @@
 /*
- * adaptable-text - v0.0.0
+ * Adaptable Text - v0.1.0
  *
  * Copyright (c) Damien Seguin - https://github.com/dmnsgn
  *
