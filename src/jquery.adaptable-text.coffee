@@ -95,10 +95,9 @@ do ($ = jQuery, window, document) ->
     ###
       Calculate max char width
     ###
-    _calculateMaxCharWidth: (text, font) ->
+    _calculateMaxCharWidth: ->
 
-      # TODO: get all possible chars
-      chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split('')
+      chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefhijklmnopqrstuvwxyz0123456789!?*()@£$%^&_-+=[]{}:;\'"\\|<>,./~`'.split('')
       len = chars.length
 
       while len--

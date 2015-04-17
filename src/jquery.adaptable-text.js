@@ -99,9 +99,9 @@
         Calculate max char width
        */
 
-      AdaptableText.prototype._calculateMaxCharWidth = function(text, font) {
+      AdaptableText.prototype._calculateMaxCharWidth = function() {
         var char, charWidth, chars, len;
-        chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split('');
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefhijklmnopqrstuvwxyz0123456789!?*()@£$%^&_-+=[]{}:;\'"\\|<>,./~`'.split('');
         len = chars.length;
         while (len--) {
           char = chars[len];
