@@ -42,8 +42,8 @@ do ($ = jQuery, window, document) ->
     ###
     adapt: ->
 
-      # TODO; check if textContent or value
-      @text = @element.value
+      # Get content
+      @text = @element.value or @element.textContent
 
       # https://developer.mozilla.org/en-US/docs/Web/CSS/font
       textWidth = @_getTextWidth @text, "#{@styles.fontStyle} #{@currentFontSize}px #{@styles.fontFamily}"

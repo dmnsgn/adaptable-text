@@ -42,7 +42,7 @@
 
       AdaptableText.prototype.adapt = function() {
         var textWidth;
-        this.text = this.element.value;
+        this.text = this.element.value || this.element.textContent;
         textWidth = this._getTextWidth(this.text, this.styles.fontStyle + " " + this.currentFontSize + "px " + this.styles.fontFamily);
         this.previousFontSize = this.currentFontSize;
         this._checkSize();
