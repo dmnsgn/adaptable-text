@@ -1,5 +1,5 @@
 /*
- * Adaptable Text - v0.1.2
+ * Adaptable Text - v0.1.3
  *
  * Copyright (c) Damien Seguin - https://github.com/dmnsgn
  *
@@ -42,6 +42,7 @@
         this.initialFontsize = this.currentFontSize;
         this.maxCharWidth = 0;
         this._calculateMaxCharWidth();
+        return this;
       };
 
 
@@ -59,6 +60,7 @@
           this.currentFontSize = ~~(this.currentFontSize * 100) / 100;
           this.element.style.fontSize = this.currentFontSize + "px";
         }
+        return this;
       };
 
       AdaptableText.prototype._checkSize = function() {
