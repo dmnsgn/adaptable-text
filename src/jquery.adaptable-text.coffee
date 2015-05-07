@@ -35,7 +35,7 @@ do ($ = jQuery, window, document) ->
       @maxCharWidth = 0
       @_calculateMaxCharWidth()
 
-      return
+      return this
 
     ###
       Change element style to fit
@@ -57,7 +57,7 @@ do ($ = jQuery, window, document) ->
         @currentFontSize = ~~(@currentFontSize * 100) / 100
         @element.style.fontSize = "#{@currentFontSize}px"
 
-      return
+      return this
 
     _checkSize: ->
 
