@@ -1,0 +1,48 @@
+{
+  "name": "adaptable-text",
+  "version": "2.0.0",
+  "description": "Adapt font size to a specified width.",
+  "main": "lib/adaptable-text.js",
+  "jsnext:main": "lib/adaptable-text.module.js",
+  "module": "lib/adaptable-text.module.js",
+  "license": "MIT",
+  "repository": "https://github.com/dmnsgn/adaptable-text",
+  "author": {
+    "name": "Damien Seguin",
+    "url": "http://dmnsgn.me"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "keywords": [
+    "responsive",
+    "text",
+    "fontsize"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w -m inline",
+    "clean": "rm -rf lib",
+    "build": "rollup -c",
+    "test": "budo test/index.js --open --live",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "budo": "^10.0.4",
+    "prettier": "^1.5.3",
+    "regenerator-runtime": "^0.10.5",
+    "rollup": "^0.43.1",
+    "rollup-plugin-babel": "^3.0.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-watch": "^4.3.1",
+    "uglify-js": "^3.0.23"
+  },
+  "dependencies": {
+    "clamp": "^1.0.1"
+  }
+}
