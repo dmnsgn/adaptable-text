@@ -44,6 +44,25 @@ requestIdleCallback(() => {
 |**minFontSize**|A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`)|
 |**width**|A maximum widht for the container.|
 
+## Scripts
+### Dev
+
+```bash
+npm run dev
+```
+
+### Test
+
+```bash
+npm run test
+```
+
+### Build
+
+```bash
+npm run build
+```
+
 ## License
 
 MIT © [Damien Seguin](https://github.com/dmnsgn)
