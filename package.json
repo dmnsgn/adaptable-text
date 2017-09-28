@@ -9,7 +9,7 @@
   "repository": "https://github.com/dmnsgn/adaptable-text",
   "author": {
     "name": "Damien Seguin",
-    "url": "http://dmnsgn.me"
+    "url": "https://dmnsgn.me"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -11,9 +11,7 @@
 $ npm install --save adaptable-text
 ```
 
-## API
-
-### LoadItem
+## Usage
 
 ```js
 const textToAdapt = new AdaptableText(document.querySelector(".textToAdapt"), {
