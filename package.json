@@ -1,6 +1,6 @@
 {
   "name": "adaptable-text",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Adapt font size to a specified width.",
   "main": "lib/adaptable-text.js",
   "jsnext:main": "lib/adaptable-text.module.js",
@@ -9,7 +9,7 @@
   "repository": "https://github.com/dmnsgn/adaptable-text",
   "author": {
     "name": "Damien Seguin",
-    "url": "http://dmnsgn.me"
+    "url": "https://dmnsgn.me"
   },
   "engines": {
     "node": ">=0.10.0"

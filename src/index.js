@@ -48,7 +48,7 @@ export default class AdaptableText {
     const previousFontSize = this.adaptedFontSize;
     const textWidth = this.getTextWidth(this.text, previousFontSize);
 
-    // this.calculateMaxCharWidth();
+    this.calculateMaxCharWidth();
     const availableWidth = this.width - this.maxCharWidth;
 
     let fontSizeGenerator;
