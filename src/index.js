@@ -37,7 +37,7 @@ export default class AdaptableText {
 
   setWidth() {
     this.width =
-      this.element.getBoundingClientRect().width || this.options.width;
+      this.options.width || this.element.getBoundingClientRect().width;
   }
 
   adapt() {
