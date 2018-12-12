@@ -1,6 +1,6 @@
 # adaptable-text
 
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Greenkeeper badge](https://badges.greenkeeper.io/dmnsgn/adaptable-text.svg)](https://greenkeeper.io/)
 
 
 > Adapt font size to a specified width.
