@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>adaptable-text by Damien Seguin (https://github.com/dmnsgn)</title>
+    <style>
+      :root {
+        --color-dark: #404040;
+        --color-light: #f2f2f2;
+        --color-accent: #fd5e62;
+      }
+
+      body {
+        margin: 0;
+        overscroll-behavior: none;
+        font-family: sans-serif;
+        color: var(--color-dark);
+        background-color: var(--color-light);
+      }
+
+      main {
+        padding: 0 20px;
+      }
+      .example {
+        float: left;
+        width: 100%;
+        clear: both;
+        margin-bottom: 20px;
+      }
+
+      .example--0 .element,
+      .example--1 .element {
+        float: left;
+        width: 50%;
+      }
+
+      .editableElement,
+      .element {
+        float: left;
+        width: 50%;
+        min-height: 100px;
+        font-size: 30px;
+        overflow-wrap: break-word;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>adaptable-text</h1>
+      <p>> Resize me to test</p>
+      <div class="example example--0">
+        <h2>=> HTMLElement with &lt;br&gt; tag</h2>
+        <div class="element">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br />Debitis
+          eum officiis architecto recusandae excepturi totam expedita beatae.
+        </div>
+        <div class="element">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br />Debitis
+          eum officiis architecto recusandae excepturi totam expedita beatae.
+        </div>
+      </div>
+
+      <div class="example example--1">
+        <h2>=> HTMLElement with minFontSize: 14</h2>
+        <div class="element">
+          Lorem ipsum dolor sit amet, consectetue hic illo.
+        </div>
+        <div class="element">
+          Lorem ipsum dolor sit amet, consectetue hic illo.
+        </div>
+      </div>
+
+      <div class="example example--2">
+        <h2>=> HTMLTextAreaElement</h2>
+        <textarea class="editableElement" autofocus></textarea>
+      </div>
+
+      <div class="example example--3">
+        <h2>=> HTMLTextAreaElement with div</h2>
+        <textarea class="editableElement" autofocus></textarea>
+        <div class="element"></div>
+      </div>
+    </main>
+    <script async src="web_modules/es-module-shims.js"></script>
+    <script src="web_modules/import-map.json" type="importmap"></script>
+
+    <script type="module">
+      import AdaptableText from "./index.js";
+
+      let adapted0;
+      let adapted1;
+
+      // Init
+      // example--0
+      adapted0 = new AdaptableText(
+        document.querySelector(".example--0 .element")
+      );
+      adapted0.init();
+
+      // example--1
+      adapted1 = new AdaptableText(
+        document.querySelector(".example--1 .element"),
+        {
+          step: 0.1,
+          minFontSize: 14,
+        }
+      );
+      adapted1.init();
+      adapted1.adapt();
+
+      // example--2
+      const editableElement2 = document.querySelector(
+        ".example--2 .editableElement"
+      );
+      const adapted2 = new AdaptableText(editableElement2);
+      adapted2.init();
+      editableElement2.addEventListener("keyup", function () {
+        adapted2.adapt();
+      });
+
+      // example--3
+      const editableElement3 = document.querySelector(
+        ".example--3 .editableElement"
+      );
+      const el3 = document.querySelector(".example--3 .element");
+
+      const adapted3 = new AdaptableText(editableElement3);
+      const elementAdapted3 = new AdaptableText(el3);
+      adapted3.init();
+      elementAdapted3.init();
+
+      editableElement3.addEventListener("keyup", function () {
+        adapted3.adapt();
+        el3.textContent = this.value;
+        elementAdapted3.adapt();
+      });
+
+      // Adapt
+      const adapt = () => {
+        adapted0.setWidth();
+        adapted0.adapt();
+        adapted1.setWidth();
+        adapted1.adapt();
+      };
+
+      // Listen for a resize event
+      window.addEventListener("resize", adapt);
+
+      // Kick off
+      requestIdleCallback(() => {
+        adapt();
+      });
+    </script>
+  </body>
+</html>

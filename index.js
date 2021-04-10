@@ -1,20 +1,36 @@
 import clamp from "clamp";
 
-const defaults = {
-  width: null,
-  step: 0.5,
-  minFontSize: 0
-};
+/**
+ * @typedef {Object} Options
+ * @property {number} [step=0.5] The step used by the generator to calculate the width of the element.
+ * @property {number} [minFontSize=0] A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`).
+ * @property {number} [width=null] A maximum widht for the container..
+ */
 
-export default class AdaptableText {
+class AdaptableText {
+  /**
+   * Creates an instance of AdaptableText.
+   * @param {HTMLElement} element
+   * @param {Options} [options]
+   */
   constructor(element, options) {
     this.element = element;
-    this.options = Object.assign(defaults, options);
+    this.options = Object.assign(
+      {
+        width: null,
+        step: 0.5,
+        minFontSize: 0,
+      },
+      options
+    );
 
     // prettier-ignore
     this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefhijklmnopqrstuvwxyz0123456789!?*()@£$%^&_-+=[]{}:;\'"\\|<>,./~`'.split('');
   }
 
+  /**
+   * Initialise the adaptor.
+   */
   init() {
     this.reset();
   }
@@ -35,11 +51,17 @@ export default class AdaptableText {
     this.calculateMaxCharWidth();
   }
 
+  /**
+   * Set the desired width for adaptation from options.width or getBoundingClientRect().width
+   */
   setWidth() {
     this.width =
       this.options.width || this.element.getBoundingClientRect().width;
   }
 
+  /**
+   * Adapt font size to a specified width
+   */
   adapt() {
     // Get element content and replace <br>
     this.text = this.element.value || this.element.innerText;
@@ -138,3 +160,5 @@ export default class AdaptableText {
     }
   }
 }
+
+export default AdaptableText;
