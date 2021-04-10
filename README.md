@@ -16,8 +16,6 @@ Adapt font size to a specified width.
 [![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
 [![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
 
-![](https://raw.githubusercontent.com/dmnsgn/adaptable-text/main/screenshot.gif)
-
 ## Installation
 
 ```bash
@@ -27,8 +25,28 @@ npm install adaptable-text
 ## Usage
 
 ```js
-import adaptableText from "adaptable-text";
-console.log(adaptableText);
+import AdaptableText from "adaptable-text";
+
+const textToAdapt = new AdaptableText(document.querySelector(".textToAdapt"), {
+  step: 0.1,
+  minFontSize: 10,
+  width: null,
+});
+textToAdapt.init();
+
+// Adapt
+const adapt = () => {
+  textToAdapt.setWidth();
+  textToAdapt.adapt();
+};
+
+// Listen for a resize event
+window.addEventListener("resize", adapt);
+
+// Kick off
+requestIdleCallback(() => {
+  adapt();
+});
 ```
 
 ## API
@@ -78,26 +96,26 @@ Creates an instance of AdaptableText.
 
 Initialise the adaptor.
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
 <a name="AdaptableText+setWidth"></a>
 
 ### adaptableText.setWidth()
 
 Set the desired width for adaptation from options.width or getBoundingClientRect().width
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
 <a name="AdaptableText+adapt"></a>
 
 ### adaptableText.adapt()
 
 Adapt font size to a specified width
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
 <a name="Options"></a>
 
 ## Options : <code>Object</code>
 
-**Kind**: global typedef  
+**Kind**: global typedef
 **Properties**
 
 | Name          | Type                | Default          | Description                                                                                                                               |
