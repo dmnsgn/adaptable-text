@@ -1,6 +1,6 @@
 {
   "name": "adaptable-text",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Adapt font size to a specified width.",
   "keywords": [
     "responsive",
@@ -26,14 +26,14 @@
   "type": "module",
   "main": "index.js",
   "types": "types/index.d.ts",
-  "engines": {
-    "node": ">=15.0.0",
-    "npm": ">=7.0.0"
-  },
   "dependencies": {
     "clamp": "^1.0.1"
   },
   "devDependencies": {
     "es-module-shims": "^0.10.3"
+  },
+  "engines": {
+    "node": ">=15.0.0",
+    "npm": ">=7.0.0"
   }
 }

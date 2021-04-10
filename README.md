@@ -35,7 +35,76 @@ console.log(adaptableText);
 
 <!-- api-start -->
 
-Auto-generated API content.
+## Classes
+
+<dl>
+<dt><a href="#AdaptableText">AdaptableText</a></dt>
+<dd></dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#Options">Options</a> : <code>Object</code></dt>
+<dd></dd>
+</dl>
+
+<a name="AdaptableText"></a>
+
+## AdaptableText
+
+**Kind**: global class
+
+- [AdaptableText](#AdaptableText)
+  - [new AdaptableText(element, [options])](#new_AdaptableText_new)
+  - [.init()](#AdaptableText+init)
+  - [.setWidth()](#AdaptableText+setWidth)
+  - [.adapt()](#AdaptableText+adapt)
+
+<a name="new_AdaptableText_new"></a>
+
+### new AdaptableText(element, [options])
+
+Creates an instance of AdaptableText.
+
+| Param     | Type                             |
+| --------- | -------------------------------- |
+| element   | <code>HTMLElement</code>         |
+| [options] | [<code>Options</code>](#Options) |
+
+<a name="AdaptableText+init"></a>
+
+### adaptableText.init()
+
+Initialise the adaptor.
+
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+<a name="AdaptableText+setWidth"></a>
+
+### adaptableText.setWidth()
+
+Set the desired width for adaptation from options.width or getBoundingClientRect().width
+
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+<a name="AdaptableText+adapt"></a>
+
+### adaptableText.adapt()
+
+Adapt font size to a specified width
+
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+<a name="Options"></a>
+
+## Options : <code>Object</code>
+
+**Kind**: global typedef  
+**Properties**
+
+| Name          | Type                | Default          | Description                                                                                                                               |
+| ------------- | ------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [step]        | <code>number</code> | <code>0.5</code> | The step used by the generator to calculate the width of the element.                                                                     |
+| [minFontSize] | <code>number</code> | <code>0</code>   | A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`). |
+| [width]       | <code>number</code> | <code></code>    | A maximum widht for the container..                                                                                                       |
 
 <!-- api-end -->
 
