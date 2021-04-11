@@ -1,6 +1,6 @@
 {
   "name": "adaptable-text",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Adapt font size to a specified width.",
   "keywords": [
     "responsive",

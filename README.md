@@ -96,26 +96,26 @@ Creates an instance of AdaptableText.
 
 Initialise the adaptor.
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
 <a name="AdaptableText+setWidth"></a>
 
 ### adaptableText.setWidth()
 
 Set the desired width for adaptation from options.width or getBoundingClientRect().width
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
 <a name="AdaptableText+adapt"></a>
 
 ### adaptableText.adapt()
 
 Adapt font size to a specified width
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
 <a name="Options"></a>
 
 ## Options : <code>Object</code>
 
-**Kind**: global typedef
+**Kind**: global typedef  
 **Properties**
 
 | Name          | Type                | Default          | Description                                                                                                                               |
