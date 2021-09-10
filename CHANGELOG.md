@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.1.0](https://github.com/dmnsgn/adaptable-text/compare/v3.0.1...v3.1.0) (2021-09-10)
+
+
+### Features
+
+* add exports field to package.json ([4d497d1](https://github.com/dmnsgn/adaptable-text/commit/4d497d18538a8d54f98d207a98289561117c53d6))
+
+
+
 ## [3.0.1](https://github.com/dmnsgn/adaptable-text/compare/v3.0.0...v3.0.1) (2021-04-11)
 
 
