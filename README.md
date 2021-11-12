@@ -122,7 +122,7 @@ Adapt font size to a specified width
 | ------------- | ------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | [step]        | <code>number</code> | <code>0.5</code> | The step used by the generator to calculate the width of the element.                                                                     |
 | [minFontSize] | <code>number</code> | <code>0</code>   | A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`). |
-| [width]       | <code>number</code> | <code></code>    | A maximum widht for the container..                                                                                                       |
+| [width]       | <code>number</code> | <code></code>    | A maximum width for the container..                                                                                                       |
 
 <!-- api-end -->
 

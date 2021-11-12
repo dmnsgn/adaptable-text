@@ -4,7 +4,7 @@ import clamp from "clamp";
  * @typedef {Object} Options
  * @property {number} [step=0.5] The step used by the generator to calculate the width of the element.
  * @property {number} [minFontSize=0] A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`).
- * @property {number} [width=null] A maximum widht for the container..
+ * @property {number} [width=null] A maximum width for the container..
  */
 
 class AdaptableText {
