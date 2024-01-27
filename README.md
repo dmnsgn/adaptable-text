@@ -63,7 +63,7 @@ adapt(true);
 ## Typedefs
 
 <dl>
-<dt><a href="#Options">Options</a> : <code>Object</code></dt>
+<dt><a href="#Options">Options</a> : <code>object</code></dt>
 <dd></dd>
 </dl>
 
@@ -77,7 +77,7 @@ adapt(true);
   - [new AdaptableText(element, [options])](#new_AdaptableText_new)
   - [.init()](#AdaptableText+init)
   - [.setWidth()](#AdaptableText+setWidth)
-  - [.adapt()](#AdaptableText+adapt)
+  - [.adapt([useBinarySearch])](#AdaptableText+adapt)
 
 <a name="new_AdaptableText_new"></a>
 
@@ -96,33 +96,38 @@ Creates an instance of AdaptableText.
 
 Initialise the adaptor.
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
 <a name="AdaptableText+setWidth"></a>
 
 ### adaptableText.setWidth()
 
 Set the desired width for adaptation from options.width or getBoundingClientRect().width
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
 <a name="AdaptableText+adapt"></a>
 
-### adaptableText.adapt()
+### adaptableText.adapt([useBinarySearch])
 
-Adapt font size to a specified width
+Adapt font size to a specified width.
 
-**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)  
+**Kind**: instance method of [<code>AdaptableText</code>](#AdaptableText)
+
+| Param             | Type                 |
+| ----------------- | -------------------- |
+| [useBinarySearch] | <code>boolean</code> |
+
 <a name="Options"></a>
 
-## Options : <code>Object</code>
+## Options : <code>object</code>
 
-**Kind**: global typedef  
+**Kind**: global typedef
 **Properties**
 
-| Name          | Type                | Default          | Description                                                                                                                               |
-| ------------- | ------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [step]        | <code>number</code> | <code>0.5</code> | The step used by the generator to calculate the width of the element.                                                                     |
-| [minFontSize] | <code>number</code> | <code>0</code>   | A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`). |
-| [width]       | <code>number</code> | <code></code>    | A maximum width for the container..                                                                                                       |
+| Name          | Type                | Default                       | Description                                                                                                                               |
+| ------------- | ------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [step]        | <code>number</code> | <code>0.5</code>              | The step used by the generator to calculate the width of the element.                                                                     |
+| [minFontSize] | <code>number</code> | <code>0</code>                | A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`). |
+| [width]       | <code>number</code> | <code>&quot;null&quot;</code> | A maximum width for the container.                                                                                                        |
 
 <!-- api-end -->
 
