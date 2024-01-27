@@ -1,10 +1,10 @@
 import clamp from "clamp";
 
 /**
- * @typedef {Object} Options
+ * @typedef {object} Options
  * @property {number} [step=0.5] The step used by the generator to calculate the width of the element.
  * @property {number} [minFontSize=0] A minimum font size for the element (max would be the size defined in a stylesheet retrieved by `window.getComputedStyle(this.element)`).
- * @property {number} [width=null] A maximum width for the container..
+ * @property {number} [width="null"] A maximum width for the container.
  */
 
 class AdaptableText {
@@ -21,7 +21,7 @@ class AdaptableText {
         step: 0.5,
         minFontSize: 0,
       },
-      options
+      options,
     );
 
     // prettier-ignore
@@ -42,7 +42,7 @@ class AdaptableText {
 
     // Set initial font size
     this.adaptedFontSize = parseFloat(
-      this.styles.getPropertyValue("font-size")
+      this.styles.getPropertyValue("font-size"),
     );
     this.initialFontsize = this.adaptedFontSize;
 
@@ -60,9 +60,10 @@ class AdaptableText {
   }
 
   /**
-   * Adapt font size to a specified width
+   * Adapt font size to a specified width.
+   * @param {boolean} [useBinarySearch]
    */
-  adapt() {
+  adapt(useBinarySearch) {
     // Get element content and replace <br>
     this.text = this.element.value || this.element.innerText;
 
@@ -72,19 +73,23 @@ class AdaptableText {
 
     this.calculateMaxCharWidth();
     const availableWidth = this.width - this.maxCharWidth;
-
-    let fontSizeGenerator;
     let newFontSize;
-    if (
-      textWidth > availableWidth &&
-      previousFontSize > this.options.minFontSize
-    ) {
-      fontSizeGenerator = this.reduceFontSize(previousFontSize);
+
+    if (useBinarySearch) {
+      newFontSize = this.binarySearch(availableWidth);
     } else {
-      fontSizeGenerator = this.augmentFontSize(previousFontSize);
-    }
-    if (fontSizeGenerator) {
-      newFontSize = fontSizeGenerator.next().value;
+      let fontSizeGenerator;
+      if (
+        textWidth > availableWidth &&
+        previousFontSize > this.options.minFontSize
+      ) {
+        fontSizeGenerator = this.reduceFontSize(previousFontSize);
+      } else {
+        fontSizeGenerator = this.augmentFontSize(previousFontSize);
+      }
+      if (fontSizeGenerator) {
+        newFontSize = fontSizeGenerator.next().value - this.options.step;
+      }
     }
 
     // Set font size if necessary
@@ -92,10 +97,31 @@ class AdaptableText {
       this.adaptedFontSize = clamp(
         newFontSize,
         this.options.minFontSize,
-        this.initialFontsize
+        this.initialFontsize,
       );
       this.element.style.fontSize = `${this.adaptedFontSize}px`;
     }
+  }
+
+  binarySearch(width) {
+    let low = this.options.minFontSize;
+    let high = this.initialFontsize;
+    let mid;
+
+    let fontSize = low;
+
+    while (low <= high) {
+      mid = (high + low) * 0.5;
+
+      if (this.getTextWidth(this.text, mid) <= width) {
+        low = mid + this.options.step;
+        fontSize = mid;
+      } else {
+        high = mid - this.options.step;
+      }
+    }
+
+    return fontSize;
   }
 
   *reduceFontSize(_fontSize) {
@@ -151,7 +177,7 @@ class AdaptableText {
     while (len--) {
       const charWidth = this.getTextWidth(
         this.chars[len],
-        this.adaptedFontSize
+        this.adaptedFontSize,
       );
 
       if (charWidth > this.maxCharWidth) {

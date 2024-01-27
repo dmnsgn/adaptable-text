@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -23,24 +23,24 @@
       main {
         padding: 0 20px;
       }
-      .example {
+      .Example {
         float: left;
         width: 100%;
         clear: both;
         margin-bottom: 20px;
       }
 
-      .example--0 .element,
-      .example--1 .element {
+      .Example--0 .Element,
+      .Example--1 .Element {
         float: left;
         width: 50%;
       }
 
-      .editableElement,
-      .element {
+      .EditableElement,
+      .Element {
         float: left;
         width: 50%;
-        min-height: 100px;
+        min-height: 60px;
         font-size: 30px;
         overflow-wrap: break-word;
         box-sizing: border-box;
@@ -51,43 +51,47 @@
     <main>
       <h1>adaptable-text</h1>
       <p>> Resize me to test</p>
-      <div class="example example--0">
+      <div class="Example Example--0">
         <h2>=> HTMLElement with &lt;br&gt; tag</h2>
-        <div class="element">
+        <div class="Element">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br />Debitis
           eum officiis architecto recusandae excepturi totam expedita beatae.
         </div>
-        <div class="element">
+        <div class="Element">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br />Debitis
           eum officiis architecto recusandae excepturi totam expedita beatae.
         </div>
       </div>
 
-      <div class="example example--1">
+      <div class="Example Example--1">
         <h2>=> HTMLElement with minFontSize: 14</h2>
-        <div class="element">
+        <div class="Element">
           Lorem ipsum dolor sit amet, consectetue hic illo.
         </div>
-        <div class="element">
+        <div class="Element">
           Lorem ipsum dolor sit amet, consectetue hic illo.
         </div>
       </div>
 
-      <div class="example example--2">
+      <div class="Example Example--2">
         <h2>=> HTMLTextAreaElement</h2>
-        <textarea class="editableElement" autofocus></textarea>
+        <textarea class="EditableElement" autofocus rows="1">
+Lorem ipsum dolor sit amet, consectetue hic illo.</textarea
+        >
       </div>
 
-      <div class="example example--3">
+      <div class="Example Example--3">
         <h2>=> HTMLTextAreaElement with div</h2>
-        <textarea class="editableElement" autofocus></textarea>
-        <div class="element"></div>
+        <textarea class="EditableElement" rows="1">
+Lorem ipsum dolor sit amet, consectetue hic illo.</textarea
+        >
+        <div class="Element"></div>
       </div>
     </main>
-    <script async src="web_modules/es-module-shims.js"></script>
-    <script src="web_modules/import-map.json" type="importmap"></script>
+    <script async src="web_modules/es-module-shims.js" type="module"></script>
+    <script src="web_modules/import-map.json" type="importmap-shim"></script>
 
-    <script type="module">
+    <script type="module-shim">
       import AdaptableText from "./index.js";
 
       let adapted0;
@@ -96,24 +100,25 @@
       // Init
       // example--0
       adapted0 = new AdaptableText(
-        document.querySelector(".example--0 .element")
+        document.querySelector(".Example--0 .Element")
       );
       adapted0.init();
+      adapted0.adapt(true);
 
       // example--1
       adapted1 = new AdaptableText(
-        document.querySelector(".example--1 .element"),
+        document.querySelector(".Example--1 .Element"),
         {
           step: 0.1,
           minFontSize: 14,
         }
       );
       adapted1.init();
-      adapted1.adapt();
+      adapted1.adapt(true);
 
       // example--2
       const editableElement2 = document.querySelector(
-        ".example--2 .editableElement"
+        ".Example--2 .EditableElement"
       );
       const adapted2 = new AdaptableText(editableElement2);
       adapted2.init();
@@ -123,9 +128,9 @@
 
       // example--3
       const editableElement3 = document.querySelector(
-        ".example--3 .editableElement"
+        ".Example--3 .EditableElement"
       );
-      const el3 = document.querySelector(".example--3 .element");
+      const el3 = document.querySelector(".Example--3 .Element");
 
       const adapted3 = new AdaptableText(editableElement3);
       const elementAdapted3 = new AdaptableText(el3);
@@ -134,7 +139,7 @@
 
       editableElement3.addEventListener("keyup", function () {
         adapted3.adapt();
-        el3.textContent = this.value;
+        el3.innerText = this.value;
         elementAdapted3.adapt();
       });
 
@@ -144,15 +149,17 @@
         adapted0.adapt();
         adapted1.setWidth();
         adapted1.adapt();
+        adapted2.setWidth();
+        adapted2.adapt();
+        adapted3.setWidth();
+        adapted3.adapt();
       };
 
       // Listen for a resize event
       window.addEventListener("resize", adapt);
 
       // Kick off
-      requestIdleCallback(() => {
-        adapt();
-      });
+      adapt();
     </script>
   </body>
 </html>

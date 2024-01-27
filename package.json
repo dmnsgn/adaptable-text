@@ -1,7 +1,7 @@
 {
   "name": "adaptable-text",
   "version": "3.1.0",
-  "description": "Adapt font size to a specified width.",
+  "description": "Adapt font size to a specified width using either binary search or linear steps.",
   "keywords": [
     "responsive",
     "text",

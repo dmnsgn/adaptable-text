@@ -10,7 +10,9 @@
 [![linted with eslint](https://img.shields.io/badge/linted_with-ES_Lint-4B32C3.svg?logo=eslint)](https://github.com/eslint/eslint)
 [![license](https://img.shields.io/github/license/dmnsgn/adaptable-text)](https://github.com/dmnsgn/adaptable-text/blob/main/LICENSE.md)
 
-Adapt font size to a specified width.
+Adapt font size to a specified width using either binary search or linear steps.
+
+Linear steps works best for small adjustments (eg. on resize) while binary search is most efficient when the expected font-size change is big.
 
 [![paypal](https://img.shields.io/badge/donate-paypal-informational?logo=paypal)](https://paypal.me/dmnsgn)
 [![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
@@ -27,7 +29,7 @@ npm install adaptable-text
 ```js
 import AdaptableText from "adaptable-text";
 
-const textToAdapt = new AdaptableText(document.querySelector(".textToAdapt"), {
+const textToAdapt = new AdaptableText(document.querySelector(".TextToAdapt"), {
   step: 0.1,
   minFontSize: 10,
   width: null,
@@ -44,9 +46,7 @@ const adapt = () => {
 window.addEventListener("resize", adapt);
 
 // Kick off
-requestIdleCallback(() => {
-  adapt();
-});
+adapt(true);
 ```
 
 ## API
