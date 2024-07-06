@@ -1,6 +1,6 @@
 {
   "name": "adaptable-text",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Adapt font size to a specified width using either binary search or linear steps.",
   "keywords": [
     "responsive",
@@ -9,7 +9,10 @@
   ],
   "homepage": "https://github.com/dmnsgn/adaptable-text",
   "bugs": "https://github.com/dmnsgn/adaptable-text/issues",
-  "repository": "dmnsgn/adaptable-text",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmnsgn/adaptable-text.git"
+  },
   "funding": [
     {
       "type": "individual",
