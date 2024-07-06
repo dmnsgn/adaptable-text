@@ -31,7 +31,7 @@
     "clamp": "^1.0.1"
   },
   "devDependencies": {
-    "es-module-shims": "^1.8.2"
+    "es-module-shims": "^1.10.0"
   },
   "engines": {
     "node": ">=15.0.0",

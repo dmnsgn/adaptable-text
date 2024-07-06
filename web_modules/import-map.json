@@ -2,7 +2,7 @@
   "imports": {
     "clamp": "./clamp.js",
     "es-module-shims": "./es-module-shims.js",
-    "es-module-shims/debug": "./es-module-shims/dist/es-module-shims.debug.js",
-    "es-module-shims/wasm": "./es-module-shims/dist/es-module-shims.wasm.js"
+    "es-module-shims/debug": "./es-module-shims/debug.js",
+    "es-module-shims/wasm": "./es-module-shims/wasm.js"
   }
 }
